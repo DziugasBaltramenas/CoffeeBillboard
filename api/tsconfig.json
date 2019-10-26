@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "../dist",
+    "baseUrl": "."
+  }
+}

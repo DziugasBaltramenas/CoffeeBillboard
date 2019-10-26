@@ -1,0 +1,21 @@
+$padding: 12px;
+$padding-double: 24px;
+$padding-half: 6px;
+$padding-quarter: 3px;
+
+$border-radius: 5px;
+$border-width: 1px;
+
+$form-label-margin: 16px;
+
+$max-app-width: 980px;
+
+:export {
+  padding: $padding;
+  paddingDouble: $padding-double;
+  paddingHalf: $padding-half;
+  paddingQuarter: $padding-quarter;
+  borderRadius: $border-radius;
+  borderWidth: $border-width;
+  formLabelMargin: $form-label-margin;
+}

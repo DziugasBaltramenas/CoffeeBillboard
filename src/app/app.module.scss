@@ -1,0 +1,29 @@
+@import './theme/styles/styles.scss';
+
+:global {
+  html, body, #app {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: $font-family;
+    background-color: $blue;
+    overflow-y: scroll;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+
+  .app-wrapper {
+	height: 100%;
+	max-width: $max-app-width;
+	width: 100%;
+  }
+}

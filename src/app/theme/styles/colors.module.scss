@@ -1,0 +1,13 @@
+$green: #4caf50;
+$blue: #08c;
+$orange: #ff8c00;
+$red: #dc143c;
+$black: #000;
+
+:export {
+  red: $red;
+  blue: $blue;
+  orange: $orange;
+  green: $green;
+  black: $black;
+}
