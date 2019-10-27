@@ -3,9 +3,11 @@ import { Request, Response, PaginationRequestModel, PaginationResponseModel } fr
 import { Coffee } from 'entity/coffee';
 import { CoffeeResponse } from 'models/dto';
 import { CoffeeMapper } from 'mappers/coffee';
+import { withErrorHandler } from 'interceptors/error-handler';
 
 class CoffeeController extends BaseController {
     private BASE_PATH: string = '/coffee';
+    private PECIFIC_COFFEE_PATH: string = `${this.BASE_PATH}/:id`;
 
     constructor() {
         super();
@@ -13,22 +15,27 @@ class CoffeeController extends BaseController {
     }
 
     public initializeRoutes(): void {
-        this.router.get(this.BASE_PATH, this.getAllCoffees);
+        this.router.get(this.BASE_PATH, withErrorHandler(this.getCoffees));
+        this.router.delete(this.PECIFIC_COFFEE_PATH, withErrorHandler(this.deleteCoffee));
     }
 
-    private getAllCoffees(
+    private getCoffees(
         req: Request<{},PaginationRequestModel>,
         res: Response<PaginationResponseModel<CoffeeResponse>>
-    ): void {
-        Coffee.findAndCount({
+    ): Promise<Response> {
+        return Coffee.findAndCount({
             take: req.query.take,
             skip: req.query.skip
-        }).then(([result, total]) => {
+        }).then(([result, total]) =>  
             res.send({
                 items: result.map(CoffeeMapper.toCoffeeDto),
                 count: total
-            });
-        })
+            })
+        )
+    }
+
+    private deleteCoffee(req: Request, res: Response): Promise<Response> {
+        return Coffee.delete(req.params.id).then(() => res.status(204).send())
     }
 }
 

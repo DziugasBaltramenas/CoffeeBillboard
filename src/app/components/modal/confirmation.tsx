@@ -1,22 +1,22 @@
-import * as React from "react";
+import React from "react";
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  Button
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions,
+    Button
 } from "@material-ui/core";
 
 export interface ConfirmationOptions {
-  title: string;
-  description: string;
+    title: string;
+    description: string;
 }
 
 interface ConfirmationModalProps extends ConfirmationOptions {
-  open: boolean;
-  onSubmit: () => void;
-  onClose: () => void;
+    open: boolean;
+    onSubmit: () => void;
+    onClose: () => void;
 }
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -33,10 +33,10 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
                 <DialogContentText>{description}</DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button color="primary" variant="contained" onClick={onSubmit}>
+                <Button color="primary" variant="contained" onClick={onClose}>
                     Cancel
                 </Button>
-                <Button color="primary" variant="contained"  onClick={onClose} autoFocus={true}>
+                <Button color="primary" variant="contained" onClick={onSubmit} autoFocus={true}>
                     Confirm
                 </Button>
             </DialogActions>

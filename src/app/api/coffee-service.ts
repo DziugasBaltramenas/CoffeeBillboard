@@ -12,6 +12,10 @@ class CoffeeService {
             .then(response => response.data);
     };
 
+    public readonly deleteCoffee = (id: string): Promise<void> => {
+        return restService.delete(`/api/coffee/${id}`)
+            .then(response => response.data);
+    };
 }
 
 const coffeeService = new CoffeeService();

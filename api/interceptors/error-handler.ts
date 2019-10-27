@@ -24,7 +24,7 @@ const databaseErrorData: DatabaseError = {
     },
 };
 
-export const withErrorHandler = <T= {}, P = {}>(fn: RouteHandler<T, P>) => {
+export const withErrorHandler = <T = {}, Q = {}, P = {}>(fn: RouteHandler<T, Q, P>) => {
     return (req, res, next) => {
         try {
             fn(req, res, next).catch(next);

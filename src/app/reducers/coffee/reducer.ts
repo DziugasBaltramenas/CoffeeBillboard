@@ -3,6 +3,7 @@ import { handleActions } from 'redux-actions';
 import { CoffeeResponse, PaginationResponseModel } from 'app/api/model';
 
 import { CoffeActionTypes } from './types';
+import { totalmem } from 'os';
 
 export interface CoffeeState {
     isLoading: boolean;
@@ -16,25 +17,39 @@ const initialState: CoffeeState = {
     total: 999,
 }
 
-const coffeeReducer = handleActions<CoffeeState, PaginationResponseModel<CoffeeResponse>>(
+const coffeeReducer = handleActions<
+    CoffeeState,
+    PaginationResponseModel<CoffeeResponse> | CoffeeResponse | number
+>(
     {
-        [CoffeActionTypes.COFFEE_FETCHING_FAILED]: (state) => {
-            return {
-                ...state,
-                isLoading: false,
-            }
-        },
         [CoffeActionTypes.COFFEE_FETCHING_SUCCEEDED]: (state, action) => {
+            const payload = action.payload as PaginationResponseModel<CoffeeResponse>;
+
             return {
                 isLoading: false,
-                coffees: state.coffees ? [...state.coffees, ...action.payload.items] : action.payload.items,
-                total: action.payload.count,
+                coffees: state.coffees ? [...state.coffees, ...payload.items] : payload.items,
+                total: payload.count,
             }
         },
         [CoffeActionTypes.COFFEE_FETCHING_STARTED]: (state) => {
             return {
                 ...state,
                 isLoading: true,
+            }
+        },
+        [CoffeActionTypes.COFFEE_FETCHING_FAILED]: (state) => {
+            return {
+                ...state,
+                isLoading: false,
+            }
+        },
+        [CoffeActionTypes.REMOVE_COFFEE]: (state, action) => {
+            const payload = action.payload as number;
+
+            return {
+                ...state,
+                coffees: state.coffees.filter(coffee => coffee.id !== payload),
+                total: state.total - 1
             }
         },
     },
