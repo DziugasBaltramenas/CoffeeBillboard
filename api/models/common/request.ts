@@ -1,7 +1,6 @@
 import { Request as ExpressRequest } from 'express';
 
-interface Request<T = {}> extends Omit<ExpressRequest, 'body'> {
+export interface Request<T = {}, P = {}> extends Omit<ExpressRequest, 'body'> {
     body: T;
+    query: P;
 }
-
-export { Request };

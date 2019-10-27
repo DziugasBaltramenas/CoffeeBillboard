@@ -13,7 +13,6 @@ export interface RestServiceConfig {
 
 class RestService {
     public post: typeof RestService.prototype.save = this.save;
-    public put: typeof RestService.prototype.update = this.update;
 
     private readonly axiosInstance: AxiosInstance;
 
@@ -48,14 +47,6 @@ class RestService {
 
     public delete(url: string, config?: AxiosRequestConfig): AxiosPromise {
         return this.axiosInstance.delete(url, config);
-    }
-
-    public update<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T> {
-        return this.axiosInstance.put(url, data, config);
-    }
-
-    public patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T> {
-        return this.axiosInstance.patch(url, data, config);
     }
 
 }

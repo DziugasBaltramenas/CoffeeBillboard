@@ -3,6 +3,7 @@ import {
     Column,
     Entity,
     PrimaryGeneratedColumn,
+    CreateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -15,6 +16,9 @@ class Coffee extends BaseEntity {
 
     @Column()
     public price: number;
+ 
+    @CreateDateColumn()
+    public created_at: Date;
 }
 
 export { Coffee };

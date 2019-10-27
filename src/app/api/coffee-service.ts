@@ -1,10 +1,14 @@
+import queryString from 'querystring';
+
 import { restService } from './common/rest-service';
-import { CoffeeResponse } from './model';
+import { CoffeeResponse, PaginationResponseModel, PaginationRequestModel } from './model';
 
 class CoffeeService {
 
-    public readonly getCoffeeList = (): Promise<CoffeeResponse[]> => {
-        return restService.get<CoffeeResponse[]>(`/api/coffee`)
+    public readonly getCoffeeList = (
+        query: PaginationRequestModel
+    ): Promise<PaginationResponseModel<CoffeeResponse>> => {
+        return restService.get<PaginationResponseModel<CoffeeResponse>>(`/api/coffee?${queryString.stringify(query)}`)
             .then(response => response.data);
     };
 
