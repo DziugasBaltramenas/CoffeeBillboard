@@ -3,6 +3,12 @@ $blue: #08c;
 $orange: #ff8c00;
 $red: #dc143c;
 $black: #000;
+$light-grey: #eeeff3;
+$grey: #999;
+$white: #fff;
+
+$typography-default-color: #5C5C5C;
+
 
 :export {
   red: $red;
@@ -10,4 +16,7 @@ $black: #000;
   orange: $orange;
   green: $green;
   black: $black;
+  white: $white;
+  grey: $grey;
+  typographyColor: $typography-default-color;
 }

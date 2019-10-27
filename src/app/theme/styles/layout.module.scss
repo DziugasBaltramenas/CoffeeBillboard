@@ -9,6 +9,7 @@ $border-width: 1px;
 $form-label-margin: 16px;
 
 $max-app-width: 980px;
+$paper-radius: $border-radius * 2;
 
 :export {
   padding: $padding;
@@ -18,4 +19,5 @@ $max-app-width: 980px;
   borderRadius: $border-radius;
   borderWidth: $border-width;
   formLabelMargin: $form-label-margin;
+  paperRadius: $paper-radius;
 }

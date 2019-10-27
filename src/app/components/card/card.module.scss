@@ -1,0 +1,23 @@
+@import './../../theme/styles/styles.scss';
+
+.card {
+    position: relative;
+
+    .image {
+        width: 100%;
+        height: 200px;
+        border-radius: $border-radius;
+        margin-bottom: $padding;
+    }
+    
+    .delete-icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: $white;
+
+        &:hover {
+            background-color: $white;
+        }
+    }
+}
