@@ -1,7 +1,7 @@
 import { BaseController } from 'models/base-controller';
 import { Request, Response, PaginationRequestModel, PaginationResponseModel } from 'models/common';
 import { Coffee } from 'entity/coffee';
-import { CoffeeResponse } from 'models/dto';
+import { CoffeeResponse, CoffeeRequest } from 'models/dto';
 import { CoffeeMapper } from 'mappers/coffee';
 import { withErrorHandler } from 'interceptors/error-handler';
 
@@ -17,6 +17,7 @@ class CoffeeController extends BaseController {
     public initializeRoutes(): void {
         this.router.get(this.BASE_PATH, withErrorHandler(this.getCoffees));
         this.router.delete(this.PECIFIC_COFFEE_PATH, withErrorHandler(this.deleteCoffee));
+        this.router.post(this.BASE_PATH, withErrorHandler(this.createCoffee));
     }
 
     private getCoffees(
@@ -36,6 +37,12 @@ class CoffeeController extends BaseController {
 
     private deleteCoffee(req: Request, res: Response): Promise<Response> {
         return Coffee.delete(req.params.id).then(() => res.status(204).send())
+    }
+
+    private createCoffee(req: Request<CoffeeRequest>, res: Response): Promise<Response> {
+        const coffee = CoffeeMapper.toCoffeeEntity(req.body);
+
+        return coffee.save().then((result) => res.send(CoffeeMapper.toCoffeeDto(result)))
     }
 }
 

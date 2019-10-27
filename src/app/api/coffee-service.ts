@@ -1,7 +1,7 @@
 import queryString from 'querystring';
 
 import { restService } from './common/rest-service';
-import { CoffeeResponse, PaginationResponseModel, PaginationRequestModel } from './model';
+import { CoffeeResponse, PaginationResponseModel, PaginationRequestModel, CoffeeRequest } from './model';
 
 class CoffeeService {
 
@@ -14,6 +14,11 @@ class CoffeeService {
 
     public readonly deleteCoffee = (id: string): Promise<void> => {
         return restService.delete(`/api/coffee/${id}`)
+            .then(response => response.data);
+    };
+
+    public readonly createCoffee = (coffee: CoffeeRequest): Promise<CoffeeResponse> => {
+        return restService.post(`/api/coffee`, coffee)
             .then(response => response.data);
     };
 }

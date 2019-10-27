@@ -8,9 +8,9 @@ import { errorHandler } from 'interceptors/error-handler';
 class App {
 
     public app: express.Application;
+    public static readonly PUBLIC_PATH: string = 'public';
 
     private readonly port: number;
-    private PUBLIC_PATH: string = 'public';
 
     constructor(controllers: BaseController[], port: number) {
         this.app = express();
@@ -42,10 +42,10 @@ class App {
     }
 
     private initializeStaticContent(): void {
-        this.app.use(express.static(path.join(__dirname, this.PUBLIC_PATH)));
+        this.app.use(express.static(path.join(__dirname, App.PUBLIC_PATH)));
         this.app.get('*', (req, res) => {
             // TODO: return not found for wrong requests
-            res.sendFile(path.join(__dirname, this.PUBLIC_PATH, 'index.html'));
+            res.sendFile(path.join(__dirname, App.PUBLIC_PATH, 'index.html'));
         });
     }
 

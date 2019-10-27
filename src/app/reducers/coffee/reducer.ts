@@ -3,7 +3,6 @@ import { handleActions } from 'redux-actions';
 import { CoffeeResponse, PaginationResponseModel } from 'app/api/model';
 
 import { CoffeActionTypes } from './types';
-import { totalmem } from 'os';
 
 export interface CoffeeState {
     isLoading: boolean;
@@ -27,7 +26,7 @@ const coffeeReducer = handleActions<
 
             return {
                 isLoading: false,
-                coffees: state.coffees ? [...state.coffees, ...payload.items] : payload.items,
+                coffees: state.coffees ? [ ...state.coffees, ...payload.items ] : payload.items,
                 total: payload.count,
             }
         },

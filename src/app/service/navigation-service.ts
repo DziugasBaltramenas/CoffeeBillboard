@@ -8,6 +8,7 @@ export interface UrlParams {
 
 class NavigationService {
     public static readonly ROOT_PATH: string = '';
+    public static readonly COFFEE_FORM_PATH: string = `${NavigationService.ROOT_PATH}/create`;
 
     public getUrl(pathParams: UrlParams): string {
         let tempText = pathParams.path;
@@ -27,6 +28,13 @@ class NavigationService {
         history.push(convertedPath);
     }
 
+    public goToBillboard(): void {
+        this.goToPath({ path: NavigationService.ROOT_PATH });
+    }
+
+    public goToCoffeeForm = (): void => {
+        this.goToPath({ path: NavigationService.COFFEE_FORM_PATH });
+    }
 }
 export const history = createBrowserHistory();
 

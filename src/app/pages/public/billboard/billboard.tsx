@@ -9,9 +9,10 @@ import { actions } from 'app/reducers/coffee/actions';
 import { RootState } from 'app/reducers';
 import { CoffeeState } from 'app/reducers/coffee/reducer';
 import { CardPlaceholder } from 'app/components/card/placeholder';
+import { coffeeService } from 'app/api/coffee-service';
+import { navigationService } from 'app/service/navigation-service';
 
 import styles from './billboard.module.scss';
-import { coffeeService } from 'app/api/coffee-service';
 
 interface OwnProps {}
 
@@ -31,7 +32,13 @@ type Props = OwnProps & DispatchProps & StateProps;
 class BillboardComponent extends React.Component<Props> {
 
     public componentDidMount(): void {
-        this.getCoffees();
+        const {
+            coffeeState
+        } = this.props;
+
+        if(!coffeeState.coffees) {
+            this.getCoffees();
+        }
     }
 
     public render(): React.ReactNode {
@@ -43,6 +50,17 @@ class BillboardComponent extends React.Component<Props> {
 
         return (
             <Grid container={true} spacing={3}>
+                <Grid item={true} xs={12}>
+                    <Button
+                        onClick={navigationService.goToCoffeeForm}
+                        className={styles.addButton}
+                        color="primary"
+                        variant="contained"
+                        arial-label="Add new coffee"
+                    >
+                        Add new
+                    </Button>
+                </Grid>
                 {!coffeeState.coffees
                     ? new Array(5).fill(null).map((_, idx) => (
                         <Grid item={true} xs={12} sm={3} key={idx}>
@@ -53,7 +71,7 @@ class BillboardComponent extends React.Component<Props> {
                         <Grid item={true} xs={12} sm={3} key={coffee.id}>
                             <Card 
                                 id={coffee.id}
-                                img={"asdfsadf"}
+                                img={coffee.imageFileName}
                                 title={coffee.title}
                                 price={coffee.price}
                                 onDelete={this.deleteCoffee}

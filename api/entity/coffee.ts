@@ -19,6 +19,9 @@ class Coffee extends BaseEntity {
  
     @CreateDateColumn()
     public created_at: Date;
+
+    @Column({ default: '' })
+    public image: string;
 }
 
 export { Coffee };

@@ -42,7 +42,8 @@ const Card: React.FC<Props> = ({id, img, title, price, onDelete}) => {
                 <img 
                     alt="A cup of coffee"
                     className={styles.image}
-                    src="https://images.pexels.com/photos/434213/pexels-photo-434213.jpeg?cs=srgb&dl=aroma-aromatic-art-434213.jpg"/> 
+                    src={`${process.env.PUBLIC_URL}/img/${img}`}
+                />
                 <Typography variant="h4">{title}</Typography>  
                 <Typography variant="overline">{currencyUtils.toEur(price)}</Typography>  
             </CardContent>
