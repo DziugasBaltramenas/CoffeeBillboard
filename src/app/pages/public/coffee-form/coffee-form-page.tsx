@@ -53,7 +53,7 @@ class CoffeeFormPage extends React.PureComponent<Props> {
             .then(fileName => coffeeService.createCoffee({
                 imageFileName: fileName,
                 title: values.title,
-                price: Number(values.price)
+                price: Number(values.price) * 100
             }))
             .then(coffee => {
 

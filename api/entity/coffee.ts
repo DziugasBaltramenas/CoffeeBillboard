@@ -20,7 +20,7 @@ class Coffee extends BaseEntity {
     @CreateDateColumn()
     public created_at: Date;
 
-    @Column({ default: '' })
+    @Column()
     public image: string;
 }
 

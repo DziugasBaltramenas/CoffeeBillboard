@@ -30,8 +30,7 @@ const Card: React.FC<Props> = ({id, img, title, price, onDelete}) => {
                 onDelete(id).then(() => setLoading(false))
             }
           })
-    }, [])
-
+    }, [id, onDelete, confirm]);
 
     return (
         <MuiCard className={styles.card}>
