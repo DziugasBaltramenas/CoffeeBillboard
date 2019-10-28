@@ -8,6 +8,8 @@ import {
     Button
 } from "@material-ui/core";
 
+import styles from './confirmation.module.scss';
+
 export interface ConfirmationOptions {
     title: string;
     description: string;
@@ -32,7 +34,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             <DialogContent>
                 <DialogContentText>{description}</DialogContentText>
             </DialogContent>
-            <DialogActions>
+            <DialogActions className={styles.actions}>
                 <Button color="primary" variant="contained" onClick={onClose}>
                     Cancel
                 </Button>

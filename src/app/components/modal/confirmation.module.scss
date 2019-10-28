@@ -1,0 +1,9 @@
+@import './../../theme/styles/styles';
+
+.actions {
+  button {
+    &:last-child {
+      margin-left: $padding;
+    }
+  }
+}

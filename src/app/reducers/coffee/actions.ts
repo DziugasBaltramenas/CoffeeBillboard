@@ -16,15 +16,17 @@ const actions = {
     fetchCoffees: (query: PaginationRequestModel): ThunkAction<Promise<void>, {}, {}, AnyAction> => 
         (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
             dispatch(actions.coffeeFetchingStarted());
+
             return coffeeService.getCoffeeList(query)
                 .then(result => {
                     dispatch(actions.coffeeFetchingSucceeded(result));
                 })
-                .catch(error => {
+                .catch(() => {
                     dispatch(actions.coffeeFetchingFailed());
                 })
     },
     removeCoffee: createAction(CoffeActionTypes.REMOVE_COFFEE),
+    increaseTotal: createAction(CoffeActionTypes.INCREASE_TOTAL_COFFEES_COUNT),
 };
 
 export { actions };

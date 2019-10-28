@@ -1,6 +1,9 @@
 import React from 'react';
 import { Grid, Paper, Button } from '@material-ui/core';
 import { Form, FormRenderProps, Field } from 'react-final-form';
+import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { bindActionCreators } from 'redux';
 
 import { TextField } from 'app/components/fields/text-field/text-field';
 import { FileUploadField } from 'app/components/fields/upload-field/file-upload-field';
@@ -9,14 +12,21 @@ import { uploadService } from 'app/api/upload-service';
 import { required } from 'app/components/fields/validations';
 import { navigationService } from 'app/service/navigation-service';
 import { NumberField } from 'app/components/fields/number-field/number-field';
+import { actions } from 'app/reducers/coffee/actions';
 
 import { CoffeeFormModel } from './coffee-form-model';
 
 import styles from './coffee-form.module.scss';
 
+interface DispatchProps {
+    actions: {
+        increaseTotal: typeof actions.increaseTotal;
+    }
+}
+
 interface OwnProps {}
 
-type Props = OwnProps;
+type Props = OwnProps & DispatchProps;
 
 const FORM_FIELDS = {
     title: 'title',
@@ -24,7 +34,7 @@ const FORM_FIELDS = {
     image: 'image'
 };
 
-class CoffeeFormPage extends React.PureComponent<Props> {
+class CoffeeFormPageComponent extends React.PureComponent<Props> {
 
     constructor(props: Props) {
         super(props);
@@ -48,15 +58,18 @@ class CoffeeFormPage extends React.PureComponent<Props> {
     private handleSubmit = (
         values: CoffeeFormModel,
     ): Promise<void> => {
-        console.log(values);
+        const {
+            actions
+        } = this.props;
+
         return uploadService.uploadImage(values.image)
             .then(fileName => coffeeService.createCoffee({
                 imageFileName: fileName,
                 title: values.title,
                 price: Number(values.price) * 100
             }))
-            .then(coffee => {
-
+            .then(() => {
+                actions.increaseTotal();
                 navigationService.goToBillboard();
             })
     };
@@ -108,5 +121,13 @@ class CoffeeFormPage extends React.PureComponent<Props> {
         );
     };
 }
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => ({
+    actions: {
+        increaseTotal: bindActionCreators(actions.increaseTotal, dispatch),
+    }
+});
+
+const CoffeeFormPage = connect(null, mapDispatchToProps)(CoffeeFormPageComponent);
 
 export { CoffeeFormPage };
