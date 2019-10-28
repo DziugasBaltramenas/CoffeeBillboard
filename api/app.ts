@@ -44,7 +44,6 @@ class App {
     private initializeStaticContent(): void {
         this.app.use(express.static(path.join(__dirname, App.PUBLIC_PATH)));
         this.app.get('*', (req, res) => {
-            // TODO: return not found for wrong requests
             res.sendFile(path.join(__dirname, App.PUBLIC_PATH, 'index.html'));
         });
     }

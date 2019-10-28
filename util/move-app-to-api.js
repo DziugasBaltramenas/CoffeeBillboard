@@ -1,4 +1,4 @@
 const shell = require('shelljs');
 
-shell.mkdir('dist/api/public');
-shell.mv('build/', 'dist/api/public');
+shell.mkdir('dist/public');
+shell.mv('build/*', 'dist/public');

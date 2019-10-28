@@ -65,7 +65,7 @@
     "build": "npm run clean && npm run build:api && npm run build:app && npm run move-app-to-api",
     "build:app": "npm run scss:generate && craco build",
     "build:api": "tsc -p api && npm run copy-api-ts-config",
-    "serve": "cd dist/api && node -r tsconfig-paths/register server.js",
+    "serve": "cd dist && node -r tsconfig-paths/register server.js",
     "test": "npm run scss:generate && craco test --transformIgnorePatterns \"node_modules/(?!(antd))/\"",
     "tslint": "mkdirp reports && tslint --config tslint.json --project tsconfig.json --format prose --out reports/tslint-report.txt",
     "stylelint": "mkdirp reports && stylelint 'src/**/*.scss' --syntax scss > reports/stylelint-report.txt",
