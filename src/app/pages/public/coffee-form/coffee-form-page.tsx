@@ -4,13 +4,15 @@ import { Form, FormRenderProps, Field } from 'react-final-form';
 
 import { TextField } from 'app/components/fields/text-field/text-field';
 import { FileUploadField } from 'app/components/fields/upload-field/file-upload-field';
-
-import { CoffeeFormModel } from './coffee-form-model';
 import { coffeeService } from 'app/api/coffee-service';
 import { uploadService } from 'app/api/upload-service';
+import { required } from 'app/components/fields/validations';
+import { navigationService } from 'app/service/navigation-service';
+import { NumberField } from 'app/components/fields/number-field/number-field';
+
+import { CoffeeFormModel } from './coffee-form-model';
 
 import styles from './coffee-form.module.scss';
-import { NavigationService, navigationService } from 'app/service/navigation-service';
 
 interface OwnProps {}
 
@@ -46,11 +48,12 @@ class CoffeeFormPage extends React.PureComponent<Props> {
     private handleSubmit = (
         values: CoffeeFormModel,
     ): Promise<void> => {
+        console.log(values);
         return uploadService.uploadImage(values.image)
             .then(fileName => coffeeService.createCoffee({
                 imageFileName: fileName,
                 title: values.title,
-                price: 200
+                price: Number(values.price)
             }))
             .then(coffee => {
 
@@ -70,6 +73,7 @@ class CoffeeFormPage extends React.PureComponent<Props> {
                             component={TextField}
                             label="Name"
                             disabled={submitting}
+                            validate={required()}
                         />
                     </Grid>
                     <Grid item={true} xs={12}>
@@ -77,9 +81,10 @@ class CoffeeFormPage extends React.PureComponent<Props> {
                             fullWidth={true}
                             required={true}
                             name={FORM_FIELDS.price}
-                            component={TextField}
+                            component={NumberField}
                             label="Price"
                             disabled={submitting}
+                            validate={required()}
                         />
                     </Grid>
                     <Grid item={true} xs={12}>
@@ -90,10 +95,11 @@ class CoffeeFormPage extends React.PureComponent<Props> {
                             component={FileUploadField}
                             label="Image"
                             disabled={submitting}
+                            validate={required()}
                         />
                     </Grid>
                     <Grid item={true} xs={12}>
-                        <Button variant="outlined" color="primary" fullWidth={true} type="submit">
+                        <Button variant="contained" color="primary" fullWidth={true} type="submit">
                             Create
                         </Button>
                     </Grid>

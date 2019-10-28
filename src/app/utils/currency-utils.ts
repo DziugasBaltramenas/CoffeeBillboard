@@ -10,7 +10,7 @@ class CurrencyUtils {
     }
 
     public toEur(amount: number): string {
-        return this.formatter.format(amount);
+        return this.formatter.format(amount / 100);
     }
 }
 

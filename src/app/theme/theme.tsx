@@ -7,6 +7,14 @@ import layout from './styles/layout.module.scss';
 const paperShadow = '0px 0px 10px 4px rgba(0,0,0,0.03)';
 
 const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: colors.primary,
+        },
+        secondary: {
+            main: colors.secondary,
+        },
+    },
     overrides: {
         MuiTypography: {
             root: {
@@ -52,7 +60,31 @@ const theme = createMuiTheme({
                     paddingBottom: layout.padding,
                 },
             }
-        }
+        },
+        MuiButton: {
+            root: {
+                textTransform: 'none',
+                boxShadow: paperShadow,
+                fontSize: typo.fontSizeSm,
+                fontWeight: 600,
+            },
+            contained: {
+                boxShadow: 'none',
+                '&:active': {
+                    boxShadow: 'none',
+                },
+            },
+            containedPrimary: {
+                color: colors.white,
+            },
+            containedSecondary: {
+                color: colors.white,
+            },
+            outlined: {
+                borderColor: colors.primary,
+                color: colors.primary,
+            },
+        },
     },
 });
 

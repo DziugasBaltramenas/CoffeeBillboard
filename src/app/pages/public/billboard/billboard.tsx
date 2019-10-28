@@ -49,7 +49,7 @@ class BillboardComponent extends React.Component<Props> {
         const isAllCoffeesLoaded = coffeeState.coffees && coffeeState.coffees.length >= coffeeState.total;
 
         return (
-            <Grid container={true} spacing={3}>
+            <Grid container={true} spacing={3} className={styles.billboard}>
                 <Grid item={true} xs={12}>
                     <Button
                         onClick={navigationService.goToCoffeeForm}
@@ -85,7 +85,7 @@ class BillboardComponent extends React.Component<Props> {
                             onClick={this.getCoffees}
                             fullWidth={true}
                             color="primary"
-                            variant="outlined"
+                            variant="contained"
                             disabled={coffeeState.isLoading}
                             arial-label="Load more coffees"
                         >

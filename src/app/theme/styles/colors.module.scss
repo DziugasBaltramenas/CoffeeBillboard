@@ -9,6 +9,8 @@ $white: #fff;
 
 $typography-default-color: #5C5C5C;
 
+$primary: #9B8861;
+$secondary:#E9C98E;
 
 :export {
   red: $red;
@@ -19,4 +21,6 @@ $typography-default-color: #5C5C5C;
   white: $white;
   grey: $grey;
   typographyColor: $typography-default-color;
+  primary: $primary;
+  secondary: $secondary;
 }

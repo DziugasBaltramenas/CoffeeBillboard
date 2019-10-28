@@ -1,3 +1,9 @@
+@import './../../../theme/styles/styles';
+
+.billboard {
+  padding-top: $padding-double;
+}
+
 .circle-progress {
     position: absolute;
     top: 50%;
