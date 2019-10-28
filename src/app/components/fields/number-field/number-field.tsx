@@ -22,7 +22,7 @@ const NumberField: React.FC<FieldRenderProps<any, any>> = ({
             value={value}
             InputProps={{
                 inputComponent: NumberFormatCustom as any,
-                startAdornment: <InputAdornment position="start">€</InputAdornment>
+                startAdornment: <InputAdornment position="start">€</InputAdornment>,
             }}
         />
     );

@@ -5,7 +5,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { bindActionCreators } from 'redux';
 
 import { Card } from 'app/components/card/card';
-import { actions } from 'app/reducers/coffee/actions';
+import { actions as reduxActions } from 'app/reducers/coffee/actions';
 import { RootState } from 'app/reducers';
 import { CoffeeState } from 'app/reducers/coffee/reducer';
 import { CardPlaceholder } from 'app/components/card/placeholder';
@@ -18,33 +18,33 @@ interface OwnProps {}
 
 interface DispatchProps {
     actions: {
-        fetchCoffees: typeof actions.fetchCoffees;
-        removeCoffee: typeof actions.removeCoffee;
-    }
+        fetchCoffees: typeof reduxActions.fetchCoffees;
+        removeCoffee: typeof reduxActions.removeCoffee;
+    };
 }
 
 interface StateProps {
-    coffeeState: CoffeeState
+    coffeeState: CoffeeState;
 }
 
 type Props = OwnProps & DispatchProps & StateProps;
-  
+
 class BillboardComponent extends React.Component<Props> {
 
     public componentDidMount(): void {
         const {
-            coffeeState
+            coffeeState,
         } = this.props;
 
-        if(!coffeeState.coffees) {
+        if (!coffeeState.coffees) {
             this.getCoffees();
         }
     }
 
     public render(): React.ReactNode {
         const {
-            coffeeState
-        } = this.props
+            coffeeState,
+        } = this.props;
 
         const isAllCoffeesLoaded = coffeeState.coffees && coffeeState.coffees.length >= coffeeState.total;
 
@@ -69,7 +69,7 @@ class BillboardComponent extends React.Component<Props> {
                     ))
                     : coffeeState.coffees.map(coffee => (
                         <Grid item={true} xs={12} sm={3} key={coffee.id}>
-                            <Card 
+                            <Card
                                 id={coffee.id}
                                 img={coffee.imageFileName}
                                 title={coffee.title}
@@ -101,40 +101,40 @@ class BillboardComponent extends React.Component<Props> {
     private getCoffees = (): void => {
         const {
             actions,
-            coffeeState
+            coffeeState,
         } = this.props;
 
         actions.fetchCoffees({
             skip: coffeeState.coffees ? coffeeState.coffees.length : 0,
             take: 8,
         });
-    }
+    };
 
     private deleteCoffee = (id: number): Promise<void> => {
         const {
             actions,
         } = this.props;
-        
+
         return coffeeService.deleteCoffee(String(id))
             .then(() => {
                 actions.removeCoffee(id);
 
                 return Promise.resolve();
-            })
-    }
+            });
+    };
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-    coffeeState: state.coffee
-})
+    coffeeState: state.coffee,
+});
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => ({
     actions: {
-        fetchCoffees: bindActionCreators(actions.fetchCoffees, dispatch),
-        removeCoffee: bindActionCreators(actions.removeCoffee, dispatch)
-    }
-})
+        fetchCoffees: bindActionCreators(reduxActions.fetchCoffees, dispatch),
+        removeCoffee: bindActionCreators(reduxActions.removeCoffee, dispatch),
+    },
+});
 
-const Billboard = connect(mapStateToProps, mapDispatchToProps)(BillboardComponent)
+const Billboard = connect(mapStateToProps, mapDispatchToProps)(BillboardComponent);
 
 export { Billboard };

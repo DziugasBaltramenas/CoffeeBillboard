@@ -20,7 +20,7 @@ class NavigationService {
         }
 
         return tempText;
-    }
+    };
 
     public goToPath(pathParams: UrlParams): void {
         const convertedPath: string = this.getUrl(pathParams);
@@ -36,6 +36,7 @@ class NavigationService {
         this.goToPath({ path: NavigationService.COFFEE_FORM_PATH });
     }
 }
+
 export const history = createBrowserHistory();
 
 const navigationService = new NavigationService();

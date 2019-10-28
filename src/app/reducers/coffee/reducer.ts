@@ -25,19 +25,19 @@ const coffeeReducer = handleActions<CoffeeState, PaginationResponseModel<CoffeeR
                 isLoading: false,
                 coffees: state.coffees ? [ ...state.coffees, ...payload.items ] : payload.items,
                 total: payload.count,
-            }
+            };
         },
         [CoffeActionTypes.COFFEE_FETCHING_STARTED]: (state) => {
             return {
                 ...state,
                 isLoading: true,
-            }
+            };
         },
         [CoffeActionTypes.COFFEE_FETCHING_FAILED]: (state) => {
             return {
                 ...state,
                 isLoading: false,
-            }
+            };
         },
         [CoffeActionTypes.REMOVE_COFFEE]: (state, action) => {
             const payload = action.payload as number;
@@ -45,14 +45,14 @@ const coffeeReducer = handleActions<CoffeeState, PaginationResponseModel<CoffeeR
             return {
                 ...state,
                 coffees: state.coffees.filter(coffee => coffee.id !== payload),
-                total: state.total - 1
-            }
+                total: state.total - 1,
+            };
         },
         [CoffeActionTypes.INCREASE_TOTAL_COFFEES_COUNT]: (state) => {
             return {
                 ...state,
-                total: state.total + 1
-            }
+                total: state.total + 1,
+            };
         },
     },
     initialState,

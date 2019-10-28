@@ -23,4 +23,4 @@ const NumberFormatCustom: React.FC<NumberFormatCustomProps> = ({ inputRef, onCha
     );
 };
 
-export { NumberFormatCustom }
+export { NumberFormatCustom };

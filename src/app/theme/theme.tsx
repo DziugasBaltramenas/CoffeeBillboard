@@ -41,7 +41,7 @@ const theme = createMuiTheme({
             },
             overline: {
                 color: colors.grey,
-            }
+            },
         },
         MuiPaper: {
             root: {
@@ -59,7 +59,7 @@ const theme = createMuiTheme({
                 '&:last-child': {
                     paddingBottom: layout.padding,
                 },
-            }
+            },
         },
         MuiButton: {
             root: {

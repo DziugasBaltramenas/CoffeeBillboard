@@ -12,7 +12,7 @@ import { uploadService } from 'app/api/upload-service';
 import { required } from 'app/components/fields/validations';
 import { navigationService } from 'app/service/navigation-service';
 import { NumberField } from 'app/components/fields/number-field/number-field';
-import { actions } from 'app/reducers/coffee/actions';
+import { actions as reduxActions } from 'app/reducers/coffee/actions';
 
 import { CoffeeFormModel } from './coffee-form-model';
 
@@ -20,8 +20,8 @@ import styles from './coffee-form.module.scss';
 
 interface DispatchProps {
     actions: {
-        increaseTotal: typeof actions.increaseTotal;
-    }
+        increaseTotal: typeof reduxActions.increaseTotal;
+    };
 }
 
 interface OwnProps {}
@@ -31,7 +31,7 @@ type Props = OwnProps & DispatchProps;
 const FORM_FIELDS = {
     title: 'title',
     price: 'price',
-    image: 'image'
+    image: 'image',
 };
 
 class CoffeeFormPageComponent extends React.PureComponent<Props> {
@@ -59,19 +59,19 @@ class CoffeeFormPageComponent extends React.PureComponent<Props> {
         values: CoffeeFormModel,
     ): Promise<void> => {
         const {
-            actions
+            actions,
         } = this.props;
 
         return uploadService.uploadImage(values.image)
             .then(fileName => coffeeService.createCoffee({
                 imageFileName: fileName,
                 title: values.title,
-                price: Number(values.price) * 100
+                price: Number(values.price) * 100,
             }))
             .then(() => {
                 actions.increaseTotal();
                 navigationService.goToBillboard();
-            })
+            });
     };
 
     private renderForm = ({ handleSubmit, submitting }: FormRenderProps<CoffeeFormModel>): React.ReactNode => {
@@ -124,8 +124,8 @@ class CoffeeFormPageComponent extends React.PureComponent<Props> {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => ({
     actions: {
-        increaseTotal: bindActionCreators(actions.increaseTotal, dispatch),
-    }
+        increaseTotal: bindActionCreators(reduxActions.increaseTotal, dispatch),
+    },
 });
 
 const CoffeeFormPage = connect(null, mapDispatchToProps)(CoffeeFormPageComponent);

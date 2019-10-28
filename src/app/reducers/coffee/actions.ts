@@ -11,9 +11,9 @@ const actions = {
     coffeeFetchingFailed: createAction(CoffeActionTypes.COFFEE_FETCHING_FAILED),
     coffeeFetchingStarted: createAction(CoffeActionTypes.COFFEE_FETCHING_STARTED),
     coffeeFetchingSucceeded: createAction<PaginationResponseModel<CoffeeResponse>>(
-        CoffeActionTypes.COFFEE_FETCHING_SUCCEEDED
+        CoffeActionTypes.COFFEE_FETCHING_SUCCEEDED,
     ),
-    fetchCoffees: (query: PaginationRequestModel): ThunkAction<Promise<void>, {}, {}, AnyAction> => 
+    fetchCoffees: (query: PaginationRequestModel): ThunkAction<Promise<void>, {}, {}, AnyAction> =>
         (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
             dispatch(actions.coffeeFetchingStarted());
 
@@ -23,8 +23,8 @@ const actions = {
                 })
                 .catch(() => {
                     dispatch(actions.coffeeFetchingFailed());
-                })
-    },
+                });
+        },
     removeCoffee: createAction(CoffeActionTypes.REMOVE_COFFEE),
     increaseTotal: createAction(CoffeActionTypes.INCREASE_TOTAL_COFFEES_COUNT),
 };

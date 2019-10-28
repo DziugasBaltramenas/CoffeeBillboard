@@ -3,7 +3,7 @@ import { restService } from './common/rest-service';
 class UploadService {
 
     public readonly uploadImage = (image: File): Promise<string> => {
-        const formData = new FormData()
+        const formData = new FormData();
 
         formData.append('imageFile', image);
 

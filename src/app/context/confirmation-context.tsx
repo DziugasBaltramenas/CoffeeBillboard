@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { ConfirmationOptions, ConfirmationModal } from 'app/components/modal/confirmation';
 
 interface ConfirmationContextOptions extends ConfirmationOptions {
@@ -14,7 +15,7 @@ const useConfirmation = () => React.useContext(ConfirmationServiceContext);
 const ConfirmationServiceProvider: React.FC = ({ children }) => {
     const [
         confirmationState,
-        setConfirmationState
+        setConfirmationState,
     ] = React.useState<ConfirmationContextOptions>(null);
 
     const openConfirmation = (options: ConfirmationContextOptions) => {
@@ -47,4 +48,4 @@ const ConfirmationServiceProvider: React.FC = ({ children }) => {
     );
 };
 
-export { useConfirmation, ConfirmationServiceProvider}
+export { useConfirmation, ConfirmationServiceProvider };

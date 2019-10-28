@@ -6,7 +6,7 @@ import { CoffeeResponse, PaginationResponseModel, PaginationRequestModel, Coffee
 class CoffeeService {
 
     public readonly getCoffeeList = (
-        query: PaginationRequestModel
+        query: PaginationRequestModel,
     ): Promise<PaginationResponseModel<CoffeeResponse>> => {
         return restService.get<PaginationResponseModel<CoffeeResponse>>(`/api/coffee?${queryString.stringify(query)}`)
             .then(response => response.data);

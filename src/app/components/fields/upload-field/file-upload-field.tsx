@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputProps, } from '@material-ui/core/Input';
+import { InputProps } from '@material-ui/core/Input';
 import { FieldRenderProps } from 'react-final-form';
 import { TextField } from '@material-ui/core';
 
@@ -22,7 +22,7 @@ class FileUploadField extends React.PureComponent<Props> {
             disabled,
             label,
             fullWidth,
-            required
+            required,
         } = this.props;
 
         const showError = ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) && meta.touched;

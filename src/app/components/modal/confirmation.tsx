@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 import {
     Dialog,
     DialogTitle,
     DialogContent,
     DialogContentText,
     DialogActions,
-    Button
-} from "@material-ui/core";
+    Button,
+} from '@material-ui/core';
 
 import styles from './confirmation.module.scss';
 
@@ -26,7 +26,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     title,
     description,
     onSubmit,
-    onClose
+    onClose,
 }) => {
     return (
         <Dialog open={open} onClose={onClose}>

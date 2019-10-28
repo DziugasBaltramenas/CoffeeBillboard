@@ -7,7 +7,7 @@ import styles from './card.module.scss';
 const CardPlaceholder: React.FC = () => {
     return (
         <MuiCard className={styles.card}>
-            <CardContent>     
+            <CardContent>
                 <Skeleton variant="rect" className={styles.image} />
                 <Skeleton height={15} width="100%" />
                 <Skeleton height={15} width="40%" />

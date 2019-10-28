@@ -40,7 +40,6 @@ const required = memoizee((message?: string): any => {
     };
 });
 
-
 const minLength = memoizee((length: number, message?: string): any => {
     return (value: string): ValidationType => {
         if (value && value.trim().length < length) {
@@ -58,7 +57,7 @@ const lengthWithoutWhitespaces = memoizee((minLengthWithoutWhitespaces: number =
             const trimmedValue = value.trim();
 
             if (!isNonEmptyString(trimmedValue) || minLength(minLengthWithoutWhitespaces)(trimmedValue)) {
-                return message || "Field is not valid";
+                return message || 'Field is not valid';
             }
         }
 
@@ -67,7 +66,6 @@ const lengthWithoutWhitespaces = memoizee((minLengthWithoutWhitespaces: number =
 });
 
 const whiteSpaceValidator = lengthWithoutWhitespaces();
-
 
 export {
     required,
