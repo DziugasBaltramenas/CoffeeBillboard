@@ -55,7 +55,7 @@
     "tslint-no-circular-imports": "0.7.0",
     "tslint-react": "4.0.0",
     "typed-scss-modules": "0.0.12",
-    "typeorm": "0.2.19",
+    "typeorm": "0.2.25",
     "typescript": "3.5.2"
   },
   "scripts": {
